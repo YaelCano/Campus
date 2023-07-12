@@ -4,23 +4,20 @@ dictPartici =  {"data":[]}
 
 def LoadInfoParticipantes():
     global dictPartici
-    if (core.checkFile("participantes.json")):
-        dictPartici = core.LoadInfo("participantes.json")
+    if (core.checkFile("campers.json")):
+        dictPartici = core.LoadInfo("campers.json")
     else:
-        core.crearInfo("Participantes.json",dictPartici)
+        core.crearInfo("campers.json",dictPartici)
 
 def Mainmenu():
     os.system('clear')
     isMenuPart = True
     print("1. Registrar")
-    print("2. Buscar participante")
-    print("3. Editar participante")
-    print("4. Eliminar participante")
-    print("5. Regresar menu principal")
+    
     opcion = int(input(">"))
     if (opcion == 1):
-        datos = {}
-        data  ={
+        
+        datos  ={
             "id": input("Ingrese la Id del Participante : ").capitalize(),
             "nombre": input("Ingrese el nombre del participante : ").capitalize(),
             "Apellido": input("Ingrese el apellido del participante : ").capitalize(),
@@ -30,19 +27,17 @@ def Mainmenu():
             "estado" : input("Ingrese el estado civil: ").capitalize(),
             "genero" : input("Ingrese el genero: ").capitalize(),
             "telefono" : input("Ingrese el numero de telefono: ")
-        
-    if (data["Edad"]>18):
-       pass
         }
-        dictPartici["data"].append(data)
-        core.crearInfo("parcipantes.json",data)
-    elif (opcion == 2 ):
-        pass
-    elif (opcion == 3):
-        pass
-    elif (opcion == 4):
-        pass    
-    elif (opcion == 5):
-        isMenuPart = False
-    if (isMenuPart):
-        Mainmenu()    
+    if (datos["Edad"]<18):
+        acudiente ={
+         "id_acudiente": input("Ingrese la id del acudiente: ").capitalize(),
+         "nombre_acu":input("Ingrese el nombre del acudinete: ").capitalize(),
+         "parentesco":input("Ingrese el parentesco: ") 
+        }
+        datos["acudiente"] = acudiente
+        dictPartici["datos"].append(datos)
+        core.crearInfo("campers.json",datos)
+    else:
+        dictPartici["datos"].append(datos)
+        core.crearInfo("camprs.json",datos)
+ 
